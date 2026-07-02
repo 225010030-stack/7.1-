@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SSC 分摊工作台 · 汇报逐字稿</title>
+<style>
+  :root{ --brand:#0052d9; --ink:#1f2329; --muted:#6b7280; --stage:#7c3aed; --stage-bg:#f5f0ff; --accent:#0f766e; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f4f5f7;color:var(--ink);line-height:1.9;font-size:18px}
+  .wrap{max-width:880px;margin:0 auto;padding:28px 22px 90px}
+  header{background:linear-gradient(135deg,#003cab,#0052d9);color:#fff;border-radius:16px;padding:30px 30px 26px;margin-bottom:26px}
+  header h1{font-size:26px;font-weight:700}
+  header p{opacity:.9;margin-top:8px;font-size:15px}
+  .meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px}
+  .meta span{background:rgba(255,255,255,.16);border-radius:20px;padding:4px 14px;font-size:13px}
+  .t{color:var(--brand);font-weight:700;font-size:14px;letter-spacing:.5px;margin:30px 0 6px;display:flex;align-items:center;gap:8px}
+  .t::before{content:"";width:4px;height:18px;background:var(--brand);border-radius:2px}
+  .sec{background:#fff;border:1px solid #e6e8eb;border-radius:12px;padding:8px 22px 18px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+  .tt{font-size:19px;font-weight:700;margin:14px 0 8px;color:#111}
+  .line{margin:10px 0}
+  .say{background:#fbfcfe;border-left:3px solid #cfe0ff;padding:10px 14px;border-radius:0 8px 8px 0}
+  .say b{color:var(--brand)}
+  .stage{background:var(--stage-bg);border:1px dashed #c4b5fd;color:#5b21b6;border-radius:8px;padding:9px 14px;margin:8px 0;font-size:15px}
+  .stage::before{content:"🎬 舞台指示 · ";font-weight:700}
+  .tip{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:8px;padding:9px 14px;margin:8px 0;font-size:15px}
+  .tip::before{content:"💡 提示 · ";font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0}
+  th{background:#eef4ff;text-align:left;padding:7px 10px}
+  td{padding:7px 10px;border-bottom:1px solid #eef}
+  code{background:#eef;padding:1px 6px;border-radius:4px;font-size:14px}
+  pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px;line-height:1.6;margin:8px 0}
+  .prep{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:10px;padding:14px 18px;margin:10px 0}
+  .prep h3{margin:0 0 8px;font-size:16px}
+  .footer{text-align:center;color:#9ca3af;font-size:13px;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>SSC 分摊工作台 · 汇报逐字稿</h1>
+  <p>产品思维主线：权限配置 → 运营反馈驱动优化 → 自检规范闭环。含现场演示动作指示。</p>
+  <div class="meta">
+    <span>⏱️ 总时长约 15 分钟</span>
+    <span>🗣️ 可照念</span>
+    <span>🎬 含 4 段现场演示</span>
+    <span>📅 2026-07-02</span>
+  </div>
+</header>
+
+<div class="prep">
+  <h3>📋 演示前准备（开讲前 5 分钟搞定）</h3>
+  <p>1. 浏览器打开并<b>保持登录态</b>：<code>http://21.214.139.16:8081/no-ioa.html</code>（建议 Chrome，投屏前先强制刷新一次 Ctrl/Cmd+Shift+R）。</p>
+  <p>2. 桌面准备两个样例文件（见文末「演示样例文件」），可直接复制粘贴保存为 CSV：<br>
+     &nbsp;&nbsp;• <code>demo_ledger.csv</code>（台账）&nbsp;&nbsp;• <code>demo_headcount.csv</code>（人数）</p>
+  <p>3. 另准备一个<b>故意出错</b>的表头文件 <code>demo_bad.csv</code>（删掉「主体」列那一行），用于演示「报错→处理指引」闭环。</p>
+</div>
+
+<!-- ============ 开场 ============ -->
+<div class="t">00:00 · 开场</div>
+<div class="sec">
+  <div class="line say">各位领导好。今天我汇报的是我们区域工具里，<b>「SSC 分摊工作台」</b>这一段时间的进展。一句话先说结论：它把我们海外某地区单次费用分摊，从原来人工在 Excel 里做 <b>40 分钟</b>，压缩到现在<b>不到 3 分钟</b>，而且整个过程同事可以自己检查、自己改，不用再到处问人。</div>
+  <div class="line say">我今天的讲法，不是按技术实现讲，而是按<b>产品思维</b>讲三件事：第一，我们怎么用权限配置来保证数据安全；第二，我们怎么从运营的反馈里，一点点把工具打磨出来；第三，我们怎么用一套「自检查错规范」，把 AI 容易出错的地方兜住。</div>
+  <div class="stage">停留首页 2 秒，不操作。让领导先看到整体页面氛围。</div>
+</div>
+
+<!-- ============ 一、产品定位 ============ -->
+<div class="t">00:45 · 第一部分：这个工具是什么（三问自查）</div>
+<div class="sec">
+  <div class="tt">我们是用「设计规范的三问」来倒推产品设计的</div>
+  <div class="line say">我们的工作台设计规范里有一个"三问自查"，我拿它自检了一下这个页面——</div>
+  <div class="line say"><b>第一问，这个页面给谁看？</b>给 SSC 的运营同事，而且按国家、按角色分开。没选身份的人，进不来。</div>
+  <div class="line say"><b>第二问，看完让他做什么？</b>很明确：上传两份文件、点一下"批量自动分摊"、下载结果。如果报错了，点"查看处理指引"，照着改完再传。</div>
+  <div class="line say"><b>第三问，结果给谁用？</b>结果是一张标准 CSV，直接喂给下游的付款平台去提单；同时那张"特殊情形清单"让同事回去修源数据。也就是说，用完之后，下游能接住、问题能闭环。</div>
+  <div class="tip">这三问是设计规范的"必答项"。讲的时候语速放慢，因为领导最在意"有没有想清楚用户和场景"。</div>
+</div>
+
+<!-- ============ 二、权限配置 ============ -->
+<div class="t">02:30 · 第二部分：权限配置（领导关心）</div>
+<div class="sec">
+  <div class="tt">权限：先选身份，才能进门</div>
+  <div class="line say">先讲权限，因为数据安全是底线。我们做了一个<b>身份门禁</b>：首页上方有一个"演示身份"选择框，你必须先选一个身份，否则下面所有功能板块都是锁着的——导航标签上会直接打个 🔒，点了也没反应。</div>
+  <div class="line say">我们设计了<b>四级权限矩阵</b>：最高是 SUPER ADMIN，全权；往下是"可操作"，但只能操作指定国家；再到"仅浏览"；最后是"无权限"。正式人员和实习生是分开管理的。这样做的目的是：谁能动数据、谁只能看，清清楚楚。</div>
+  <div class="stage">[演示 A · 门禁] 在首页"演示身份"下拉框停在"请选择身份"，点一下"知识库"标签，展示出 🔒 锁定提示；再选一个身份（如 SUPER ADMIN），导航标签解锁。这一步只花 30 秒，但很直观。</div>
+  <div class="line say">这里我想强调一点：我们不是把权限写死在页面里，而是有一张后台的权限审计表——哪个模块、谁能看、谁能改、谁是管理员，一目了然，方便后面接总台的 SSO 统一认证。</div>
+</div>
+
+<!-- ============ 三、运营反馈驱动 ============ -->
+<div class="t">04:00 · 第三部分：从运营反馈里发现的优化点</div>
+<div class="sec">
+  <div class="tt">工具不是一次性设计出来的，是运营"用出来"的</div>
+  <div class="line say">这个工具我特别想讲的一点——它不是我拍脑袋设计的，而是把运营同事用的时候踩的坑，一条条变成产品能力的。我举几条：</div>
+  <div class="line say">运营说，"有的行金额是空的、甚至是负的，它静悄悄就成功了，我没发现"——我们就加了<b>数据质量报告</b>，每一类异常都标出有几条、怎么处理的，结果页顶部直接给你看。</div>
+  <div class="line say">运营说，"不同主体的费用串到一块分摊了"——我们就改成<b>按主体 join</b>，美国的就是美国的、巴西的就是巴西的，绝不串。</div>
+  <div class="line say">运营说，"人数表里同一个成本中心出现了两次，结果不对"——我们修成<b>自动合并累加</b>，并把冲突记进质量报告。</div>
+  <div class="line say">运营说，"报错了不知道怎么修，还得问人"——这就引出了我下面要重点讲的，我们的<b>自检规范中心</b>。</div>
+  <div class="tip">这一段是"产品思维"的核心证据：用反馈驱动迭代。讲每条时简单一句"反馈原话 → 我们做了什么"，节奏快、信息密。</div>
+</div>
+
+<!-- ============ 四、核心亮点 ============ -->
+<div class="t">05:30 · 第四部分：四个核心亮点</div>
+<div class="sec">
+  <div class="tt">亮点一 · 美洲看板，一套工具管三个国家</div>
+  <div class="line say">我们服务的是美洲——美国、加拿大、巴西三个国家共用一套工具。它按国家切换，按主体自动归并，而且每个国家有自己的专属处理特例，比如美国的税务扣款、加拿大的消费税、巴西的税号校验，各有各的规则。</div>
+
+  <div class="tt">亮点二 · 时长与优先级节约（新加坡案例）</div>
+  <div class="line say">最有说服力的是新加坡的一个案例：原来单次分摊要 Excel 手工 VLOOKUP、再交叉核对，<b>差不多 40 分钟</b>；现在上传、执行、下载，<b>不到 3 分钟</b>，节约了大约 <b>90%</b> 的操作时间，还顺带消除了人为复制粘贴的错误。</div>
+  <div class="line say">这里要特别感谢 <b>Emily</b>：我们一起解决了台账格式不统一的问题——不同国家导出来的 xlsx 多 sheet、列名还不一样。我们做了一个"xlsx 自动提取 + 配置化映射"，换表结构只改一个配置文件，不用改代码，就把这个坑填平了。</div>
+
+  <div class="tt">亮点三 · AI 幻觉防护 & 海外 Token 限制</div>
+  <div class="line say">领导可能会担心：这工具用 AI，会不会有"幻觉"、会不会被海外的 token 限制卡住？我的回答是——我们刻意把 AI 定位成"辅助整理、不替代判断"。分摊引擎本身是纯 Python 计算，<b>不消耗任何 LLM token</b>，可以无限次跑；只有"识别字段映射"这一步，才可选性地用一下 AI，而且每次都要人确认才执行。规则本身是写死在配置文件里的，不是 AI 现编的，所以不会"幻觉"。</div>
+
+  <div class="tt">亮点四 · Special Case 处理规范（自检自纠）</div>
+  <div class="line say">这是我觉得最值得讲的部分。我们把所有可能出错的场景，梳理成了 <b>24 条 Special Case</b>，分三级：红色是"必须修的错"、黄色是"系统已经帮你处理了的"、蓝色是"提示"。每条都写清了：报错长什么样、去哪检查、怎么改、改完怎么传。而且——</div>
+  <div class="stage">[演示 B · 规范中心] 点导航"知识库"，进入"分摊规范中心"。点"🇺🇸 美国 US"标签，展开任意一张卡片，展示「报错 → 检查错误 → 修改 → 上传」四步。再在搜索框输入"S3"，演示搜索定位。</div>
+  <div class="line say">——更关键的是，这些规则是<b>按国家分的</b>。同事在美国就只看美国的特例，在巴西就看巴西的。这就实现了"同事自我检查、自我修正"，不用每次都来找我。</div>
+</div>
+
+<!-- ============ 五、现场演示 ============ -->
+<div class="t">08:30 · 第五部分：现场完整演示（核心）</div>
+<div class="sec">
+  <div class="tt">演示 C · 一次真实的分摊（美国工作区）</div>
+  <div class="stage">切到"美国工作区"。按顺序：① 选演示身份（若未选）；② 账单月填 <code>202607</code>；③ 上传 <code>demo_ledger.csv</code> 到"台账 CSV"；④ 上传 <code>demo_headcount.csv</code> 到"P1 人数 CSV"；⑤ 点"动作1 · 批量自动分摊"。</div>
+  <div class="line say">[边操作边讲] 大家看，我选了身份、填了账单月、上传了台账和人数两份文件，点一下"批量自动分摊"——进度条走完，结果 CSV 自动下载了。整个过程不到一分钟。下面这块就是我刚说的"数据质量报告"，哪一类有几条、怎么处理的，白纸黑字。</div>
+  <div class="stage">待执行完成，指给领导看结果日志里的"特殊情形处理清单"表格（含级别/编号/条数/系统处理/建议修复动作）。</div>
+
+  <div class="tt">演示 D · 报错→处理指引的闭环（最有说服力）</div>
+  <div class="stage">把"台账 CSV"换成 <code>demo_bad.csv</code>（故意缺"主体"列的表头文件），其余不变，再点"批量自动分摊"。</div>
+  <div class="line say">[边操作边讲] 我再演示一个"出错"的场景——我故意传了一份表头不对的文件。看，它没有直接算、也没有崩，而是立刻告诉我：表头缺了"主体"这一列。而且旁边有个按钮叫"查看处理指引"——我点一下。</div>
+  <div class="stage">点击结果里的"查看处理指引 · bad_header"按钮，页面自动跳回"知识库 → 分摊规范中心"，并展开 bad_header 那条卡片。</div>
+  <div class="line say">它直接把我带到了对应的处理说明：这里写清了报错原因、去哪检查、怎么补、补完怎么传。也就是说，<b>同事自己照着这四步改完、重传，问题就解决了</b>——这是真正的"自查自纠"，不需要懂技术、也不需要来问我。</div>
+  <div class="tip">演示 D 是整场的"高潮点"。务必让领导看到"报错按钮 → 一键跳转文档"这个连贯动作，这正是产品闭环的体现。</div>
+</div>
+
+<!-- ============ 六、进度与下一步 ============ -->
+<div class="t">12:30 · 第六部分：进度与下一步</div>
+<div class="sec">
+  <div class="tt">当前进度</div>
+  <div class="line say">现在这个工具已经在做<b>灰度测试</b>，线上可用，服务器我们自己用 systemd 托管、挂了会自动拉起。代码已经进 GitHub 仓库了，方便以后迁入总台。规范中心 24 条规则也上线了。</div>
+  <div class="line say">但目前最关键的一件事是：<b>它还需要各区域持续喂真实原始数据</b>。因为只有真实数据进来，我们才能不断积累新的 Special Case 规则，把覆盖做厚。所以下一步，我欢迎各区域多拿真实台账来跑。</div>
+  <div class="tt">下一步计划</div>
+  <div class="line say">近期，灰度收集数据、沉淀规则；中期，接 HR 数仓把"手工传人数"这步也自动化，并接总台 SSO；远期，整体迁到总台门户，把待办和告警也统一收口。</div>
+  <div class="line say">最后总结一句：这个工具的价值，不只是"快了 90%"，而是我们<b>用权限守住了安全、用反馈打磨了体验、用规范兜住了出错</b>——它现在是一个运营能自己用、自己查、自己改的工具。我的汇报到此，谢谢各位领导。</div>
+</div>
+
+<!-- ============ 演示样例文件 ============ -->
+<div class="t">附 · 演示样例文件（复制到桌面保存为 .csv）</div>
+<div class="sec">
+  <div class="tt">① demo_ledger.csv（台账）</div>
+  <pre>主体,Payment Description,含税总额,成本中心,供应商
+AMERICA,Office rent US,12000,CC-US-1001,VendorA
+AMERICA,Software subscription,4000,CC-US-1002,VendorB
+AMERICA,Business travel,2000,CC-US-1001,VendorC</pre>
+  <p style="font-size:14px;color:var(--muted)">注：主体写 "AMERICA" 是为了现场展示系统自动规范化为 "US" 的容错能力。</p>
+
+  <div class="tt">② demo_headcount.csv（人数）</div>
+  <pre>主体,成本中心,人数,部门
+US,CC-US-1001,3,研发
+US,CC-US-1002,2,市场</pre>
+
+  <div class="tt">③ demo_bad.csv（故意缺"主体"列，用于演示报错闭环）</div>
+  <pre>Payment Description,含税总额,成本中心
+Office rent US,12000,CC-US-1001</pre>
+  <p style="font-size:14px;color:var(--muted)">注：删掉了"主体"列，上传后会触发 bad_header 报错，从而演示"查看处理指引"闭环。</p>
+</div>
+
+<div class="footer">SSC 分摊工作台 · 汇报逐字稿 · 2026-07-02 · 仅供内部汇报使用</div>
+
+</div>
+</body>
+</html>
