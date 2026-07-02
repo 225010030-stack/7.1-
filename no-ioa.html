@@ -4731,9 +4731,9 @@
       }
 
       /* ============ 分摊规范中心（Playbook） ============ */
-      let SPECIAL_CASES = null;
-      let _scPromise = null;
-      let _kbQuery = "";
+      var SPECIAL_CASES = null;
+      var _scPromise = null;
+      var _kbQuery = "";
       function loadSpecialCases() {
         if (SPECIAL_CASES) return Promise.resolve(SPECIAL_CASES);
         if (_scPromise) return _scPromise;
