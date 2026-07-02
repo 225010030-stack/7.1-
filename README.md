@@ -59,7 +59,7 @@ python -m uvicorn app:app --host 0.0.0.0 --port 8081
 ## 特殊情形处理规范（Playbook）
 
 - `GET /api/special-cases` 返回 `special_cases.json`。
-- 前端「知识库 → 分摊规范中心」按国家（🌐全球 / 🇺🇸美国 / 🇨🇦加拿大 / 🇧🇷巴西）渲染。
+- 前端「知识库 → 分摊规范中心」按国家（🌐全球 / 🇺🇸美国 / 🇨🇦加拿大 / 🇸🇬新加坡）渲染。
 - 后端 `allocate_core` 报出的 `special_cases` **代码**与 JSON 的 `code` 一一对应；
   运行报错时，结果页带「查看处理指引」按钮，一键跳到对应条目。
 

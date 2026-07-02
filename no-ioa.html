@@ -2910,13 +2910,13 @@
                   <button type="button" class="sub-tab active" data-sub="kb-global">🌐 全球通用</button>
                   <button type="button" class="sub-tab" data-sub="kb-us">🇺🇸 美国 US</button>
                   <button type="button" class="sub-tab" data-sub="kb-ca">🇨🇦 加拿大 CA</button>
-                  <button type="button" class="sub-tab" data-sub="kb-br">🇧🇷 巴西 BR</button>
+                  <button type="button" class="sub-tab" data-sub="kb-sg">🇸🇬 新加坡 SG</button>
                 </div>
                 <div class="kb-search"><input id="kbSearch" type="text" placeholder="🔍 搜索报错编号或关键词（如 S3 / 主体 / 税费 / 重复）" aria-label="搜索特殊情形"></div>
                 <div class="sub-view active" id="kb-global"></div>
                 <div class="sub-view" id="kb-us"></div>
                 <div class="sub-view" id="kb-ca"></div>
-                <div class="sub-view" id="kb-br"></div>
+                <div class="sub-view" id="kb-sg"></div>
               </div>
             </section>
 
@@ -4801,7 +4801,7 @@
         }));
       }
       function renderAllPlaybook() {
-        ["GLOBAL", "US", "CA", "BR"].forEach(c => renderPlaybookCountry(c));
+        ["GLOBAL", "US", "CA", "SG"].forEach(c => renderPlaybookCountry(c));
         applyKbFilter();
       }
       function applyKbFilter() {

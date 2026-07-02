@@ -7,7 +7,7 @@
     { "code": "GLOBAL", "name": "全球通用", "en": "Global", "flag": "🌐" },
     { "code": "US", "name": "美国", "en": "United States", "flag": "🇺🇸" },
     { "code": "CA", "name": "加拿大", "en": "Canada", "flag": "🇨🇦" },
-    { "code": "BR", "name": "巴西", "en": "Brazil", "flag": "🇧🇷" }
+    { "code": "SG", "name": "新加坡", "en": "Singapore", "flag": "🇸🇬" }
   ],
   "levels": {
     "error": { "mark": "❌", "label": "必须修复", "color": "#dc2626", "note": "该情形会导致部分台账行未分摊，结果不完整，修复源数据后重传。" },
@@ -128,7 +128,7 @@
       "applies_to": ["GLOBAL"],
       "error": "该台账行「主体」为空，无法按主体 join，该行被跳过、不计入结果（结果不完整）。",
       "check": ["打开台账，筛选「主体」为空的行", "确认是漏填还是源数据本身缺该字段"],
-      "fix": ["补全「我方主体」（如 Canada / Brazil / US）", "确实无主体的行删除或单独说明"],
+      "fix": ["补全「我方主体」（如 Canada / Singapore / US）", "确实无主体的行删除或单独说明"],
       "upload": ["补全后重新上传台账"]
     },
     {
@@ -285,23 +285,69 @@
       "upload": ["标注后重新上传（可选）"]
     },
     {
-      "code": "BR-ISS",
-      "title": "巴西 ISS / PIS / COFINS 税费未区分",
+      "code": "SG-GST",
+      "title": "新加坡 GST 未单列",
       "level": "warn",
-      "applies_to": ["BR"],
-      "error": "BR 费用常含 ISS（服务税）、PIS、COFINS 等，未区分会全部混在含税总额里分摊。",
-      "check": ["看 BR 台账是否把税并入含税总额", "确认费用类型是否区分税费"],
-      "fix": ["税费与本金拆行，费用类型标注具体税种", "按巴西税法复核税率"],
-      "upload": ["拆分后重新上传 BR 台账"]
+      "applies_to": ["SG"],
+      "error": "SG 费用含 GST（商品与服务税，当前税率 9%）但未在台账里单列时，税额会混在含税总额中一起分摊，影响成本归集口径。",
+      "check": [
+        "看 SG 台账「含税总额」是否含 GST",
+        "确认费用类型列是否已区分「税费」与「本金」",
+        "核对金额是否按含税价填报（应拆为不含税 + GST）"
+      ],
+      "fix": [
+        "税费与本金拆成两行，或单独标注费用类型=GST",
+        "不含税金额 = 含税总额 ÷ 1.09，GST = 含税总额 − 不含税金额",
+        "按 IRAS 要求保留 GST 可抵扣凭证"
+      ],
+      "upload": ["拆分后重新上传 SG 台账"]
     },
     {
-      "code": "BR-CNPJ",
-      "title": "巴西 CNPJ 缺失导致主体无法匹配",
+      "code": "SG-CPF",
+      "title": "新加坡 CPF（公积金）雇主缴交未区分",
+      "level": "warn",
+      "applies_to": ["SG"],
+      "error": "SG 费用若包含 CPF 雇主缴交部分（OA/SA/MA 三账户）但未单独标注，会当作普通人力成本一起分摊。",
+      "check": [
+        "看 SG 台账是否有 CPF 相关行（或备注含 CPF 字样）",
+        "确认是否需要把 CPF 从人力成本中剥离"
+      ],
+      "fix": [
+        "CPF 单独一行，费用类型标注为「CPF-雇主\"",
+        "或确认业务口径允许合并分摊则忽略此提示"
+      ],
+      "upload": ["标注后重新上传 SG 台账（可选）"]
+    },
+    {
+      "code": "SG-CURRENCY",
+      "title": "新加坡币种混合（SGD / USD / MYR）",
+      "level": "info",
+      "applies_to": ["SG"],
+      "error": "SG 运营常涉及多币种交易（SGD 本币、USD 结算、MYR 大马供应商），系统按「交易币种」列原样输出不做换算。",
+      "check": [
+        "看 SG 台账「交易币种」列是否有多种币种",
+        "确认是否需要在结果中统一折算"
+      ],
+      "fix": [
+        "如需统一口径，在上传前先自行换算成 SGD",
+        "或在费用类型中标注币种便于下游识别"
+      ],
+      "upload": ["换算后重新上传（可选）"]
+    },
+    {
+      "code": "SG-ENTITY",
+      "title": "新加坡主体名称写法不一致",
       "level": "error",
-      "applies_to": ["BR"],
-      "error": "BR 主体通常以 CNPJ 标识，若台账或人数表的「主体」未填 CNPJ（或写法不一致），会落到 BR key 却匹配不上。",
-      "check": ["看 BR 主体名是否都带 CNPJ", "确认台账与人数表主体写法一致"],
-      "fix": ["统一用 CNPJ 作为主体标识（或一致的简称）", "两边都补齐 CNPJ"],
+      "applies_to": ["SG"],
+      "error": "SG 主体在台账和人数表中写法不同（如 SINGAPORE PTE LTD vs Singapore vs SG-PTE），导致无法按主体 join，该主体行被跳过。",
+      "check": [
+        "看结果页是否有 S3/S4 报错指向 SG 主体",
+        "对比台账「我方主体」与人数表「主体」的 SG 行"
+      ],
+      "fix": [
+        "统一 SG 主体名：建议统一为 SINGAPORE 或 SG（与 ledger_config.json 派生规则一致）",
+        "两边文件都用同一个值"
+      ],
       "upload": ["统一后重新上传两个文件"]
     }
   ]

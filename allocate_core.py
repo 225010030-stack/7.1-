@@ -35,9 +35,9 @@ def _entity_key(name: str) -> str:
 
     规则：
       CANADA                         -> CA
-      BRL / BRAZIL / BRASIL          -> BR
+      SINGAPORE / SG / SG-PTE       -> SG
       AMERICA / US / UNITED STATES   -> US
-      其它（如 SG、MX）              -> 原样大写
+      其它（如 MX、BR）              -> 原样大写
     空值                            -> ""（无法 join）
     """
     n = _clean(name).upper()
@@ -45,8 +45,8 @@ def _entity_key(name: str) -> str:
         return ""
     if "CANADA" in n:
         return "CA"
-    if "BRL" in n or "BRAZIL" in n or "BRASIL" in n:
-        return "BR"
+    if "SINGAPORE" in n or n == "SG" or n.startswith("SG-") or n.startswith("SGP"):
+        return "SG"
     if "AMERICA" in n or n == "US" or "UNITED STATES" in n:
         return "US"
     return n

@@ -14,7 +14,7 @@
         "from": "我方主体",
         "rules": [
           { "contains": "CANADA", "value": "CA" },
-          { "contains": "BRL", "value": "BR" },
+          { "contains": "SINGAPORE", "value": "SG" },
           { "contains": "AMERICA", "value": "US" },
           { "contains": "US", "value": "US" }
         ],
