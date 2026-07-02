@@ -1,0 +1,37 @@
+{
+  "ledger": {
+    "sheet": "NA 自动扣款的单子",
+    "header_row": 2,
+    "data_start_row": 3,
+    "columns": {
+      "主体": "我方主体",
+      "交易币种": "约定付款币种",
+      "含税总额": "约定付款金额",
+      "Payment Description": "付款事由"
+    },
+    "derived": {
+      "国家": {
+        "from": "我方主体",
+        "rules": [
+          { "contains": "CANADA", "value": "CA" },
+          { "contains": "BRL", "value": "BR" },
+          { "contains": "AMERICA", "value": "US" },
+          { "contains": "US", "value": "US" }
+        ],
+        "default": ""
+      }
+    }
+  },
+  "headcount": {
+    "sheet": null,
+    "header_row": 1,
+    "data_start_row": 2,
+    "columns": {
+      "主体": "主体",
+      "成本中心": "成本中心",
+      "部门": "部门",
+      "人数": "人数"
+    },
+    "derived": {}
+  }
+}

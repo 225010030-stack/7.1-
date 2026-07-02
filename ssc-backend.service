@@ -1,0 +1,17 @@
+[Unit]
+Description=SSC No-IOA 自动分摊后端
+After=network.target
+
+[Service]
+# 生产用 /usr/bin/python3.12 运行 uvicorn；迁移到总台时按实际解释器调整
+User=root
+WorkingDirectory=/opt/ssc-noioa
+ExecStart=/usr/bin/python3.12 -m uvicorn app:app --host 0.0.0.0 --port 8081
+Restart=always
+RestartSec=3
+# 上传/下载目录可通过环境变量覆盖（默认 /opt/ssc-noioa/uploads、/opt/ssc-noioa/downloads）
+Environment=ALLOC_UPLOAD_DIR=/opt/ssc-noioa/uploads
+Environment=ALLOC_DOWNLOAD_DIR=/opt/ssc-noioa/downloads
+
+[Install]
+WantedBy=multi-user.target
