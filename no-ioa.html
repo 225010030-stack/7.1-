@@ -2576,7 +2576,7 @@
                   <option value="qianjunshan">单钱君</option>
                   <option value="danniewu">吴丽芳 / Dennie</option>
                   <option value="cindyyu">伍艳萍 / Cindy</option>
-                  <option value="oscarwei">魏梓棠 / Oscar</option>
+                  <option value="oscarwei">魏梓梁 / Oscar</option>
                 </optgroup>
                 <optgroup label="美国运营（US）">
                   <option value="jessieiii">Jessie Li</option>
@@ -2796,15 +2796,14 @@
                     <h3 class="rt-l3-title">操作步骤</h3>
                     <div class="rt-step-group">
                       <h4 class="rt-step-title">步骤一 · 执行动作</h4>
-                      <div class="rt-auto-bar"><span class="rt-auto-label">自动化</span><button type="button" class="btn btn-primary" id="sgBtnRun">一键生成 Medical Check Up 摘要</button></div>
+                      <div class="rt-auto-bar"><span class="rt-auto-label">自动化</span><button type="button" class="btn btn-primary" id="sgBtnRun">一键生成本月eelisting</button></div>
                       <h4 class="rt-step-title">步骤二 · 上传输入文件</h4>
                       <div class="rt-form-grid">
                         <label class="rt-field rt-span2">① Active Employee Report<input type="file" id="sgActive" accept=".xlsx" /></label>
-                        <label class="rt-field rt-span2">② Terminated Report<input type="file" id="sgTerminated" accept=".xlsx" /></label>
+                        <label class="rt-field rt-span2">② Terminated Employee Report<input type="file" id="sgTerminated" accept=".xlsx" /></label>
                         <label class="rt-field rt-span2">③ 上月 Medical Check Up 结果<input type="file" id="sgLastEe" accept=".xlsx" /></label>
                       </div>
                       <h4 class="rt-step-title">步骤三 · 结果输出</h4>
-                      <div class="lite-actions"><button type="button" class="btn btn-sm" id="sgDownloadTemplate">下载提交模板说明</button></div>
                       <div class="lite-log" id="sgLog">等待执行…</div>
                     </div>
 
@@ -5040,13 +5039,6 @@
           renderToolMetrics("sg");
         }
       });
-      document.getElementById("sgDownloadTemplate").addEventListener("click", () => {
-        const text = "SG Medical Check Up 模板说明\n1) 上传 Active / Terminated / Last Month Result\n2) 字段建议: employee_id, legal_name, medical_checkup_status\n3) 输出标签: 新增/离职/冲突/缺失";
-        downloadText("SG_medical_checkup_template_note.txt", text);
-        addToolRun("sg", "download_template", "下载 SG Medical Check Up 模板说明");
-        renderToolHistory("sg");
-        renderToolMetrics("sg");
-      });
       document.querySelectorAll("[data-clear-history]").forEach((btn) => {
         btn.addEventListener("click", () => {
           const region = btn.dataset.clearHistory;
@@ -5153,7 +5145,7 @@
       { id:"vvliu",         name:"刘微 / VV Liu",         roleLabel:"P2 · Function PM", group:"formal" },
       { id:"jiachungu",     name:"谷佳妮（Jiachun）",     roleLabel:"P2 · Function PM", group:"formal" },
       { id:"tobyliao",      name:"廖梓兔",                roleLabel:"P2 · Function PM", group:"formal" },
-      { id:"oscarwei",      name:"魏梓棠 / Oscar",         roleLabel:"Mentor · dannie", group:"formal" },
+      { id:"oscarwei",      name:"魏梓梁 / Oscar",         roleLabel:"Mentor · dannie", group:"formal" },
       { id:"annawzhang",    name:"张文婧 / Anna Zhang",   roleLabel:"Mentor · vliu",   group:"formal" },
       { id:"melodyxuxu",    name:"徐秋翊 / Melody",       roleLabel:"Mentor · jiachungu", group:"formal" },
       { id:"rrayzhao",      name:"赵睿 / Ray",            roleLabel:"Mentor · tobyliao", group:"formal" },
@@ -5176,7 +5168,7 @@
       { id:"sherwinhow",    name:"SherWin How",           roleLabel:"成员",             group:"formal" },
       // ── 实习生 Interns ──
       { id:"annawzhang_int",name:"张文婧 / Anna Zhang",   roleLabel:"实习生",         group:"intern" },
-      { id:"oscarwei_int",  name:"魏梓棠 / Oscar",         roleLabel:"实习生",         group:"intern" },
+      { id:"oscarwei_int",  name:"魏梓梁 / Oscar",         roleLabel:"实习生",         group:"intern" },
       { id:"rrayzhao_int",  name:"赵睿 / Ray",            roleLabel:"实习生",         group:"intern" },
       { id:"melodyxuxu_int",name:"徐秋翊 / Melody",       roleLabel:"实习生",         group:"intern" },
     ];
@@ -5189,7 +5181,7 @@
       // CA 运营（与 US 独立组）
       ca: ["jessieiii","brandyliu","ritalo","v_rainiyuan","lokyezzou"],
       // SG 运营
-      sg: ["michellelim"],
+      sg: ["michellelim","oscarwei"],
       // 实习生权限（独立 key，不影响正式人员）
       intern_admin: ["annawzhang_int","oscarwei_int"],   // annawzhang + oscar = 全部权限
       intern_us: [],
